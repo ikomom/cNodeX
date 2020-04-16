@@ -1,0 +1,6 @@
+@import "../../assets/scss/variables";
+.#{$prefix} {
+  &-listItem-wrap {
+    width: 100%;
+  }
+}

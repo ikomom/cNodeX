@@ -1,0 +1,28 @@
+@import "../../assets/scss/variables";
+
+.#{$prefix} {
+  &-tag-wrap {
+    display: inline-block;
+    min-width: 80px;
+    height: 45px;
+    text-align: center;
+    border-radius: 10px;
+  }
+
+  &-tag-normal {
+    color: #999;
+    background-color: #e5e5e5;
+  }
+
+  &-tag-top {
+    color: #fff;
+    background-color: #80bd01;
+  }
+
+  &-tag-good {
+    color: red;
+    background-color: #fff;
+    border: 0.9px solid crimson;
+  }
+
+}
