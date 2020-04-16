@@ -1,4 +1,5 @@
 import Taro, {Component, Config} from '@tarojs/taro'
+import 'taro-ui/dist/style/index.scss'
 import "@tarojs/async-await";
 import {Provider} from "@tarojs/redux";
 import dva from './utils/dva';
@@ -33,13 +34,29 @@ class App extends Component {
    */
   config: Config = {
     pages: [
-      'pages/index/index'
+      'pages/index/index',
+      'pages/mine/mine'
     ],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'black'
+    },
+    tabBar: {
+      list: [
+        {
+          pagePath: 'pages/index/index',
+          text: '',
+          iconPath: './assets/images/home.png',
+          selectedIconPath: './assets/images/home2.png',
+        }, {
+          pagePath: 'pages/mine/mine',
+          text: '',
+          iconPath: './assets/images/personal2.png',
+          selectedIconPath: './assets/images/personal.png',
+        },
+      ]
     }
   }
 
@@ -88,5 +105,5 @@ class App extends Component {
   }
 }
 
-Taro.render(<App/>, document.getElementById('app'))
+Taro.render(<App />, document.getElementById('app'))
 

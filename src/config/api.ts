@@ -4,28 +4,21 @@
 import request from "../utils/request";
 
 declare type TopicTab = "ask" | "share" | "job" | "good";
-
+declare type topicsRequestData = {
+  page: number,
+  tab: TopicTab
+  limit: number,
+  mdrender: boolean
+}
 class Request {
   // 当为 false 时，不渲染。默认为 true，渲染出现的所有 markdown 格式文本。
   static mdrender = 'true';
 
   /**
    * 主题首页
-   * @param page
-   * @param limit?
-   * @param tab? 主题分类
    */
-  static async getTopics(page = 0, limit?: number, tab?: TopicTab) {
-    return request({
-      url: '/topics',
-      data: {
-        method: "GET",
-        page,
-        tab,
-        limit: limit,
-        mdrender: false,
-      }
-    });
+  static async getTopics(data: topicsRequestData) {
+    return request({url: '/topics', data: {...data}});
   }
 
   /**
@@ -38,7 +31,6 @@ class Request {
     return request({
       url: `/topic/${id}`,
       data: {
-        method: "GET",
         mdrender: this.mdrender,
         accesstoken,
       }

@@ -1,10 +1,7 @@
 /**
- * pages页面快速生成脚本
- *
- * 用法：npm run com `文件名`
+ * 组件页面快速生成
  *
  */
-
 // eslint-disable-next-line import/no-commonjs
 const fs = require('fs');
 
@@ -21,15 +18,15 @@ const indexTep = `import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { ${capPirName}Props, ${capPirName}State } from './${dirName}.interface'
 import './${dirName}.scss'
+
 class ${capPirName} extends Component<${capPirName}Props,${capPirName}State > {
+  static defaultProps:${capPirName}Props = {}
+
   constructor(props: ${capPirName}Props) {
     super(props)
     this.state = {}
   }
-  static options = {
-    addGlobalClass: true
-  }
-  static defaultProps:${capPirName}Props = {}
+
   render() {
     return (
       <View className='fx-${dirName}-wrap'>

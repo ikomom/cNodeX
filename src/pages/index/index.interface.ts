@@ -5,7 +5,7 @@
  * @interface IndexState
  */
 export interface IndexState {
-
+  current:number
 }
 
 /**
@@ -20,13 +20,14 @@ export interface IndexProps {
 }
 
 export interface DataInterface {
+  tab: string;
   author: AuthorInterface,
   author_id: string,
   content: string,
   create_at: string,
   title: string,
   id: string
-  // last_reply_at: string
+  last_reply_at: string
   reply_count: number,
   good: boolean,
   top: boolean,

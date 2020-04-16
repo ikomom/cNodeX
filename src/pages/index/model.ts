@@ -11,7 +11,7 @@ export default {
   effects: {
     * getTopics({payload}, {call, put}) {
       console.log('effect: getTopics', payload)
-      const {data} = yield call(Request.getTopics, 1, 15, "good")
+      const {data} = yield call(Request.getTopics, {...payload})
       yield put({
         type: 'save',
         payload: {

@@ -12,5 +12,5 @@ export const globalData: any = {}
 // 时间格式装换函数
 
 export const formatTime = (time = new Date()) => (
-  `${pad(time.getHours())}:${pad(time.getMinutes())}:${pad(time.getSeconds())}.${pad(time.getMilliseconds(), 3)}`
+  `${time.getFullYear()}/${time.getMonth() + 1}/${time.getDate()} ${pad(time.getHours())}:${pad(time.getMinutes())}:${pad(time.getSeconds())}`
 )
