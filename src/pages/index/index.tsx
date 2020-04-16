@@ -1,35 +1,87 @@
-import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import Taro, {Component, Config} from '@tarojs/taro'
+import {Button, View} from '@tarojs/components'
+import {connect} from '@tarojs/redux'
+
+import {IndexProps, IndexState} from './index.interface'
 import './index.scss'
 
-export default class Index extends Component {
 
-  componentWillMount () { }
+@connect(({index}) => ({...index}),
+  () => ({
 
-  componentDidMount () { }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
-
-  /**
-   * 指定config的类型声明为: Taro.Config
-   *
-   * 由于 typescript 对于 object 类型推导只能推出 Key 的基本类型
-   * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
-   * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
-   */
+  }))
+class Index extends Component<IndexProps, IndexState> {
   config: Config = {
-    navigationBarTitleText: '首页'
+    navigationBarTitleText: 'taro_dva_typescript'
   }
 
-  render () {
+  constructor(props: IndexProps) {
+    super(props)
+    this.state = {
+    }
+
+  }
+
+  async getTopics() {
+    await this.props.dispatch({
+      type: 'index/getTopics',
+      payload: {}
+    })
+  }
+
+  test() {
+    Taro.getStorage({key: "list"})
+      .then(async (res) => {
+        await this.props.dispatch({
+          type:"index/save",
+          payload: {
+            data: res.data,
+          }
+        })
+      })
+  }
+
+  componentDidMount() {
+    // Taro.showNavigationBarLoading();
+    // this.getTopics().then(res => {
+    //   console.log('res', res);
+    //   Taro.hideNavigationBarLoading();
+    // });
+    this.test()
+  }
+
+  componentWillReceiveProps(nextProps: Readonly<IndexProps>, nextContext: any): void {
+    console.log('nextProps', nextProps, nextContext, this.props);
+    // @ts-ignore
+    if (this.props.data.length != nextProps.data.length) {
+      Taro.setStorageSync("list", nextProps.data)
+    }
+  }
+
+  render() {
+    const {data} = this.props
+    console.log('this.props===>>', data);
+
     return (
-      <View className='index'>
-        <Text>Hello world!</Text>
+      <View className='fx-index-wrap'>
+        <View className='index-topbar'>New资讯</View>
+        <View className='index-data'>
+          {
+            data && data.length
+              ? data.map((item) => {
+              return (
+                <Button className='index-list' key={item.id}>
+                  <View className='index-img' style={`background-image: url(${item.author.avatar_url})`} />
+                  <View className='index-title'>{item.title}</View>
+                </Button>
+              )
+              }): <View>Loading 。。。。。。</View>
+          }
+        </View>
       </View>
     )
   }
 }
+
+export default Index
+

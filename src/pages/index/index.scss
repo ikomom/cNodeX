@@ -1,0 +1,48 @@
+@import "../../assets/scss/variables";
+
+.#{$prefix} {
+  &-index-wrap {
+    width: 100%;
+    min-height: 100vh;
+
+    .index {
+      &-topbar {
+        padding: 10px 50px;
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+        font-size: 30px;
+      }
+
+      // &-data {
+      // }
+
+      &-title {
+        font-size: 28px;
+        color: #666;
+        width: 100%;
+        font-weight: bold;
+      }
+
+      &-list {
+        border-bottom: 1px solid #eee;
+        padding-bottom: 20px;
+        margin: 20px 24px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      &-img {
+        width: 70%;
+        height: 200px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: right center;
+      }
+    }
+  }
+
+}
+
