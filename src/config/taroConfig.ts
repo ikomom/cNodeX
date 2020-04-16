@@ -1,5 +1,5 @@
 import Taro,{ Component } from '@tarojs/taro'
-import { SHAREINFO } from './index'
+import { SHARE_INFO } from './index'
 
 /**
  * 封装taro小程序的一些方法
@@ -21,5 +21,5 @@ Taro.navigateTo = (data) => {
 
 // 挂载分享方法 Component
 Component.prototype.onShareAppMessage = function () {
-  return SHAREINFO
+  return SHARE_INFO
 }

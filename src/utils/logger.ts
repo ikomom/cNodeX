@@ -1,25 +1,24 @@
-
 /**
- * 封装logo函数
+ * 封装logger函数
  */
 
-import { formatTime } from './common';
+import {formatTime} from './common';
 
 const defaults = {
   level: 'log',
   logger: console,
   logErrors: true,
   colors: {
-    title:'logger',
-    req:'#9e9e9e',
-    res:'#4caf50',
-    error:'#f20404',
+    title: 'logger',
+    req: '#9e9e9e',
+    res: '#4caf50',
+    error: '#f20404',
   }
 }
 
-function printBuffer(logEntry, options){
-  const {logger,colors} = options;
-  let {title,started,req,res} = logEntry;
+function printBuffer(logEntry, options) {
+  const {logger, colors} = options;
+  let {title, started = new Date(), req, res} = logEntry;
 
   // Message
   const headerCSS = ['color:gray; font-weight:lighter;']
@@ -33,11 +32,14 @@ function printBuffer(logEntry, options){
 
 }
 
-interface LogEntry{
-  started ? : object  // 触发时间
+interface LogEntry {
+  started?: object,  // 触发时间
+  title?: string,
+  req?: any,
+  res?: any,
 }
-
-function createLogger(options: LogEntry = {}){
+// 创建logger
+function createLogger(options: LogEntry = {}) {
   const loggerOptions = Object.assign({}, defaults, options)
   const logEntry = options
   logEntry.started = new Date();
