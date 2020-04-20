@@ -1,11 +1,9 @@
-
 /**
  *  pages 页面快速生成脚本
  *
  *  npm run tem '文件名‘
  */
 
-// eslint-disable-next-line import/no-commonjs
 const fs = require('fs')
 
 const dirName = process.argv[2]
@@ -23,11 +21,9 @@ const indexTep = `
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 // import { connect } from '@tarojs/redux'
-// import Api from '../../utils/request'
 // import Tips from '../../utils/tips'
 import { ${capPirName}Props, ${capPirName}State } from './${dirName}.interface'
 import './${dirName}.scss'
-// import {  } from '../../components'
 
 // @connect(({ ${dirName} }) => ({
 //     ...${dirName},
@@ -35,7 +31,7 @@ import './${dirName}.scss'
 
 class ${capPirName} extends Component<${capPirName}Props,${capPirName}State > {
 config:Config = {
-    navigationBarTitleText: '页面标题'
+    navigationBarTitleText: '${dirName}'
 }
 constructor(props: ${capPirName}Props) {
     super(props)
@@ -49,7 +45,7 @@ componentDidMount() {
 render() {
     return (
     <View className='fx-${dirName}-wrap'>
-        页面内容
+        ${dirName}
     </View>
     )
 }
@@ -71,7 +67,7 @@ const scssTep = `
 
 // config 接口地址配置模板
 
-const configTep =`
+const configTep = `
 export default {
     test:'/wechat/perfect-info',  //XX接口
 }
@@ -79,7 +75,7 @@ export default {
 
 // 接口请求模板
 
-const serviceTep =`
+const serviceTep = `
 import Api from '../../utils/request'
 export const testApi = data => Api.test(
     data
@@ -89,8 +85,6 @@ export const testApi = data => Api.test(
 // model 模板
 
 const modelTep = `
-// import Taro from '@tarojs/taro';
-// import * as ${dirName}Api from './service';
 export default {
     namespace: '${dirName}',
     state: {

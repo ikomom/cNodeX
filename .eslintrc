@@ -1,9 +1,11 @@
 {
   "extends": ["plugin:@typescript-eslint/eslint-recommended", "taro"],
   "rules": {
-    "no-unused-vars": "off",
+    "no-unused-vars": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx"] }],
-    "import/prefer-default-export": false
+    "react/sort-comp": 0,
+    "import/prefer-default-export": 0,
+    "import/no-commonjs": 0
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {

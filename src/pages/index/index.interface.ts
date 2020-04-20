@@ -15,26 +15,37 @@ export interface IndexState {
  * @interface IndexProps
  */
 export interface IndexProps {
-  dispatch?: any,
+  loading: object
+  dispatch?: any
   data?: Array<DataInterface>
 }
 
-export interface DataInterface {
-  tab: string;
-  author: AuthorInterface,
-  author_id: string,
-  content: string,
-  create_at: string,
-  title: string,
+export interface CommonInterface {
+  author: AuthorInterface
+  content: string
+  create_at: string
   id: string
+}
+
+export interface DataInterface  extends CommonInterface{
+  tab: string
+  author_id: string
+  title: string
   last_reply_at: string
-  reply_count: number,
-  good: boolean,
-  top: boolean,
+  reply_count: number
+  good: boolean
+  top: boolean
   visit_count: number
+  replies?: Array<object>
 }
 
 export interface AuthorInterface {
-  loginname: string,
-  avatar_url: string,
+  loginname: string
+  avatar_url: string
+}
+//单个回复
+export interface ReplayInterface extends CommonInterface{
+  is_uped: boolean
+  reply_id: string | null
+  ups: Array<string>
 }

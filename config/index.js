@@ -9,8 +9,12 @@ const config = {
   },
   sourceRoot: 'src',
   outputRoot: 'dist',
+  uglify: {
+    enable: true,
+  },
   babel: {
     sourceMap: true,
+
     presets: [
       ['env', {
         modules: false
@@ -29,8 +33,7 @@ const config = {
     ]
   },
   plugins: [],
-  defineConstants: {
-  },
+  defineConstants: {},
   mini: {
     postcss: {
       pxtransform: {
@@ -50,6 +53,11 @@ const config = {
           generateScopedName: '[name]__[local]___[hash:base64:5]'
         }
       }
+    },
+    copy: {
+      patterns: [
+        {from: 'src/assets/sitemap.json', to: 'dist/sitemap.json'}
+      ]
     }
   },
   h5: {

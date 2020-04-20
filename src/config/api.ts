@@ -3,7 +3,7 @@
  */
 import request from "../utils/request";
 
-declare type TopicTab = "ask" | "share" | "job" | "good";
+declare type TopicTab = "ask" | "share" | "job" | "good" | "dev";
 declare type topicsRequestData = {
   page: number,
   tab: TopicTab
@@ -11,14 +11,11 @@ declare type topicsRequestData = {
   mdrender: boolean
 }
 class Request {
-  // 当为 false 时，不渲染。默认为 true，渲染出现的所有 markdown 格式文本。
-  static mdrender = 'true';
-
   /**
    * 主题首页
    */
   static async getTopics(data: topicsRequestData) {
-    return request({url: '/topics', data: {...data}});
+    return request({url: '/topics', data: {mdrender: false, ...data}});
   }
 
   /**
@@ -31,7 +28,7 @@ class Request {
     return request({
       url: `/topic/${id}`,
       data: {
-        mdrender: this.mdrender,
+        mdrender: false,
         accesstoken,
       }
     })

@@ -1,21 +1,25 @@
-import Taro, {Component, Config} from '@tarojs/taro'
-import {Image, View, Text} from '@tarojs/components'
-import {connect} from '@tarojs/redux'
-import {AtTabs, AtTabsPane} from 'taro-ui'
+import Taro, { Component, Config } from '@tarojs/taro'
+// import { Image, View, Text, ScrollView } from '@tarojs/components'
+import { connect } from '@tarojs/redux'
+import { AtTabs, AtTabsPane } from 'taro-ui'
 
-import {IndexProps, IndexState} from './index.interface'
+import { IndexProps, IndexState } from './index.interface'
 import './index.scss'
-import Tag from "../../components/tag/tag";
-import {formatTime} from "../../utils/common";
+import ListItem from "../../components/listItem/listItem";
+import { flatten } from "../../utils/common";
 
 
-@connect(({index}) => ({...index}),
+@connect(({index, loading}) => {
+    return {...index, loading: loading.global}
+  },
   () => ({}))
 class Index extends Component<IndexProps, IndexState> {
   config: Config = {
-    navigationBarTitleText: 'cNodeX'
+    navigationBarTitleText: 'cNodeX',
+    enablePullDownRefresh: true,
+    onReachBottomDistance: 200,
   }
-  private tabList: Array<any>;
+  private readonly tabList: Array<any>;
 
   constructor(props: IndexProps) {
     super(props)
@@ -23,104 +27,125 @@ class Index extends Component<IndexProps, IndexState> {
       current: 0
     }
     this.tabList = [
-      {title: "全部"},
-      {title: "精华"},
-      {title: "分享"},
-      {title: "问答"},
+      {title: "全部", key: "all"},
+      {title: "精华", key: "good"},
+      {title: "分享", key: "share"},
+      {title: "问答", key: "ask"},
+      // {title: "招聘", key: "job", show: false},
+      // {title: "客户端测试", key: "dev", show: false},
     ]
   }
 
-  async getTopics() {
+  async getTopics(key, page?: number) {
     await this.props.dispatch({
       type: 'index/getTopics',
       payload: {
-
+        limit: 15,
+        tab: key,
+        page
       }
     })
   }
 
-  test() {
-    Taro.getStorage({key: "list"})
-      .then(async (res) => {
-        await this.props.dispatch({
-          type: "index/save",
-          payload: {
-            data: res.data,
-          }
-        })
-      })
+  async clearData(key) {
+    await this.props.dispatch({
+      type: 'index/clearData',
+      payload: {
+        tab: key,
+      }
+    })
   }
 
-  componentDidMount() {
-    Taro.showNavigationBarLoading();
-    this.getTopics().then(res => {
-      console.log('res', res);
-      Taro.hideNavigationBarLoading();
-    });
-    this.test()
+
+  async componentDidMount() {
+    await this.getTopics("all")
   }
 
-  componentWillReceiveProps(nextProps: Readonly<IndexProps>, nextContext: any): void {
-    console.log('nextProps', nextProps, nextContext, this.props);
-    // @ts-ignore
-    if (this.props.data.length != nextProps.data.length) {
-      Taro.setStorageSync("list", nextProps.data)
+  componentWillReceiveProps(nextProps: Readonly<IndexProps>): void {
+    // console.log('nextProps', nextProps, nextContext, this.props);
+    if (this.props.loading !== nextProps.loading) {
+      if (nextProps.loading) {
+        Taro.showNavigationBarLoading();
+        Taro.showLoading({title: '加载中'})
+      } else {
+        Taro.hideNavigationBarLoading();
+        Taro.hideLoading();
+      }
     }
   }
 
-  renderAll() {
-    const {data} = this.props
-    return (
-      <View className='fx-index-wrap'>
-        <View className='index-topbar'></View>
-        <View className='index-data'>
-          {
-            data && data.length
-              ? data.map((item) => {
-                return (
-                  <View className='index-list' key={item.id}>
-                    <View className='index-header'>
-                      <View className='author'>
-                        <Image src={item.author.avatar_url} mode='scaleToFill' className='index-img' lazyLoad />
-                        <text>{item.author.loginname}</text>
-                      </View>
-                      <View className='tag'>
-                        {item.top ? <Tag type='top' /> : item.tab? <Tag>{item.tab}</Tag> : null}
-                        {'\t'}
-                        {item.good ? <Tag type='good' /> : null}
-                      </View>
-                    </View>
-                    <View className='index-title'>{item.title}</View>
-                    <View className='index-footer'>
-                      <Text className='time'>update: {formatTime(new Date(item.last_reply_at))}</Text>
-                      <Text className='time'>{item.reply_count} / {item.visit_count}</Text>
-                    </View>
-                  </View>
-                )
-              }) : <View>Loading 。。。。。。</View>
-          }
-        </View>
-      </View>
-    )
+  getKey = () => (this.tabList[this.state.current].key)
+
+  async onPullDownRefresh() {
+    console.warn('start: onPullDownRefresh', new Date())
+    const key = this.getKey();
+    // 刷新先清除旧数据
+    await this.clearData(key)
+    await this.getTopics(key)
+    Taro.stopPullDownRefresh();
+    console.warn('stop: onPullDownRefresh', new Date())
   }
 
-  handleClick = (index) => {
-    console.log(index)
-    this.setState({current: index});
+  async onReachBottom() {
+    const key = this.getKey();
+    const {data = {}} = this.props;
+    console.warn('start: onReachBottom', data);
+    await this.getTopics(key, data[key].length)
+  }
+
+  async getTopicDetail(id) {
+    await this.props.dispatch({
+      type: 'index/getTopicDetail',
+      payload: {
+        id
+      }
+    })
+  }
+
+  handleListClick = (_event, item) => {
+    this.getTopicDetail(item.id)
+      .then(res => {
+        console.warn('跳转成功', res);
+        Taro.navigateTo({url:'/pages/article/article'})
+      })
+  };
+
+  renderList = (key: string) => {
+    const {data = {}} = this.props;
+    return flatten(data[key]).map((item) => (
+      <ListItem item={item} key={item.id} onClick={(e) => this.handleListClick(e, item)} />
+    ));
+  }
+  /**
+   * tab栏点击
+   * @param index
+   */
+  handleClick =  (index: number) => {
+    console.log("handleClick", index)
+    if (!this.props.loading) {
+      this.setState({current: index}, async () => {
+        //空的时候自动刷新
+        const key = this.tabList[index].key
+        const {data = {}} = this.props;
+        if (!data[key] || !data[key].length) {
+          await this.getTopics(key);
+        }
+      })
+    }
   };
 
   render() {
     return (
-      <AtTabs current={this.state.current} tabList={this.tabList} onClick={this.handleClick} >
-        <AtTabsPane current={this.state.current} index={0}>
-          {this.renderAll()}
-        </AtTabsPane>
-        <AtTabsPane current={this.state.current} index={1}>
-          <View style='padding: 100px 50px;background-color: #FAFBFC;text-align: center;'>标签页二的内容</View>
-        </AtTabsPane>
-        <AtTabsPane current={this.state.current} index={2}>
-          <View style='padding: 100px 50px;background-color: #FAFBFC;text-align: center;'>标签页三的内容</View>
-        </AtTabsPane>
+      <AtTabs onClick={this.handleClick} current={this.state.current} tabList={this.tabList}>
+        {
+          this.tabList.map((tab, index) => {
+            return (
+              <AtTabsPane key={tab.key} current={this.state.current} index={index}>
+                {this.renderList(tab.key)}
+              </AtTabsPane>
+            )
+          })
+        }
       </AtTabs>
     )
   }

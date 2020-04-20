@@ -12,6 +12,17 @@ declare module '@tarojs/taro' {
   }
 }
 
+declare global {
+  interface cptowxmlProp {
+    nodes: object
+  }
+  // 自定义jsx组件实例
+  namespace JSX {
+    interface IntrinsicElements {
+      'cptowxml': cptowxmlProp
+    }
+  }
+}
 // 声明
 declare let require: any;
 declare let dispatch: any

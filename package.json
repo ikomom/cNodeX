@@ -47,6 +47,8 @@
     "@tarojs/taro-tt": "2.1.4",
     "@tarojs/taro-weapp": "2.1.4",
     "babel-runtime": "^6.26.0",
+    "cheerio": "^1.0.0-rc.3",
+    "dayjs": "^1.8.24",
     "dva-core": "^2.0.2",
     "dva-loading": "^3.0.20",
     "nerv-devtools": "^1.5.5",

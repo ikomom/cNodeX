@@ -1,6 +1,42 @@
 @import "../../assets/scss/variables";
-.#{$prefix} {
-  &-listItem-wrap {
-    width: 100%;
+
+
+.#{$prefix}-list {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  padding: 20px 24px;
+
+  .title {
+    font-size: 30px;
+    color: #666;
+    margin-bottom: 18px;
   }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 24px;
+    color: #bfbfbf;
+
+    .count {
+      display: flex;
+
+      .reply_count {
+        width: 32px;
+        margin-right: 6px;
+        padding-top: 10px;
+        background: url("../../assets/images/chat.png") no-repeat;
+      }
+
+      .visit_count {
+        width: 32px;
+        margin-right: 6px;
+        padding-top: 10px;
+        background: url("../../assets/images/eye.png") no-repeat;
+      }
+
+    }
+
+  }
+
 }
