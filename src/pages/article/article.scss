@@ -1,0 +1,12 @@
+@import "../../assets/scss/variables";
+
+.#{$prefix} {
+  &-article-wrap {
+    width: 100%;
+    min-height: 100vh;
+
+    .replies {
+      border-top: 1px solid #eee;
+    }
+  }
+}

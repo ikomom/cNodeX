@@ -9,9 +9,9 @@ const config = {
   },
   sourceRoot: 'src',
   outputRoot: 'dist',
-  uglify: {
-    enable: true,
-  },
+  // uglify: {
+  //   enable: true,
+  // },
   babel: {
     sourceMap: true,
 

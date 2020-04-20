@@ -14,12 +14,12 @@ if (!dirName) {
 }
 
 //页面模板
-const indexTep = `import Taro, { Component } from '@tarojs/taro'
+const indexTep = `import Taro, { PureComponent } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { ${capPirName}Props, ${capPirName}State } from './${dirName}.interface'
 import './${dirName}.scss'
 
-class ${capPirName} extends Component<${capPirName}Props,${capPirName}State > {
+class ${capPirName} extends PureComponent<${capPirName}Props,${capPirName}State > {
   static defaultProps:${capPirName}Props = {}
 
   constructor(props: ${capPirName}Props) {

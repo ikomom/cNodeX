@@ -53,6 +53,7 @@ export default (opts: Options) => {
       }
     }).catch((err) => {
       Tips.toast(err.errMsg);
+      console.warn(err)
     })
   }))
 }

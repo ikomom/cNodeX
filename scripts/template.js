@@ -18,7 +18,7 @@ if (!dirName) {
 // 页面模板构建
 
 const indexTep = `
-import Taro, { Component, Config } from '@tarojs/taro'
+import Taro, { PureComponent, Config } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 // import { connect } from '@tarojs/redux'
 // import Tips from '../../utils/tips'
@@ -29,7 +29,7 @@ import './${dirName}.scss'
 //     ...${dirName},
 // }))
 
-class ${capPirName} extends Component<${capPirName}Props,${capPirName}State > {
+class ${capPirName} extends PureComponent<${capPirName}Props,${capPirName}State > {
 config:Config = {
     navigationBarTitleText: '${dirName}'
 }

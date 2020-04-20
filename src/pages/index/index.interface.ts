@@ -5,7 +5,14 @@
  * @interface IndexState
  */
 export interface IndexState {
-  current:number
+  current: number
+  loadMore: boolean
+}
+
+export interface LoadingInterface {
+  global: boolean
+  effects: { [key: string]: boolean }
+  models: { [key: string]: boolean }
 }
 
 /**
@@ -15,7 +22,7 @@ export interface IndexState {
  * @interface IndexProps
  */
 export interface IndexProps {
-  loading: object
+  loading: LoadingInterface
   dispatch?: any
   data?: Array<DataInterface>
 }
@@ -27,7 +34,7 @@ export interface CommonInterface {
   id: string
 }
 
-export interface DataInterface  extends CommonInterface{
+export interface DataInterface extends CommonInterface {
   tab: string
   author_id: string
   title: string
@@ -43,8 +50,9 @@ export interface AuthorInterface {
   loginname: string
   avatar_url: string
 }
+
 //单个回复
-export interface ReplayInterface extends CommonInterface{
+export interface ReplayInterface extends CommonInterface {
   is_uped: boolean
   reply_id: string | null
   ups: Array<string>

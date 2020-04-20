@@ -30,7 +30,7 @@ export function currentData(time: string) {
 //一级扁平化
 export function flatten(source: Array<any>) {
   const response:Array<any> = [];
-  source && source.forEach(value => response.push(...value))
+  source && source.forEach((value = {}) => response.push(...value))
   return response;
 }
 

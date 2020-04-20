@@ -1,0 +1,12 @@
+@import "../../assets/scss/variables";
+
+.#{$prefix} {
+  &-LoadMore-wrap {
+    width: 100%;
+    height: 100px;
+    //display: flex;
+    //align-items: center;
+    //justify-content: center;
+    position: relative;
+  }
+}

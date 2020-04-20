@@ -14,7 +14,7 @@ class Request {
   /**
    * 主题首页
    */
-  static async getTopics(data: topicsRequestData) {
+  static getTopics(data: topicsRequestData) {
     return request({url: '/topics', data: {mdrender: false, ...data}});
   }
 

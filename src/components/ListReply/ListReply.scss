@@ -1,0 +1,22 @@
+@import "../../assets/scss/variables";
+
+.#{$prefix} {
+  &-ListReply-wrap {
+    border-bottom: 1px solid #eee;
+    padding: 20px 24px;
+
+    .icon-content {
+      display: flex;
+      line-height: 48px;
+      font-size: 30px;
+      color: #a8a8ab;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      font-size: 24px;
+      color: #bfbfbf;
+    }
+  }
+}
