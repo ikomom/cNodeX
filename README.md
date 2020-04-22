@@ -37,14 +37,14 @@ npm run script:com [Component Name] # 创建组件
 
 扫码访问小程序:
 
-![Gitter](./img/cnodx.jpg)
+![Gitter](img/cnodx.jpg)
 
 ## 部分页面展示
 |Home|Article|
 | :---: | :---: |
-|![首页](./img/Home.jpg) | ![文章](./img/article.jpg)|
+|![首页](img/Home.jpg) | ![文章](img/article.jpg)|
 |Mine|Collect|
-|![我的](./img/Home.jpg) | ![收藏](./img/collect.jpg)|
+|![我的](img/Home.jpg) | ![收藏](img/collect.jpg)|
 
 ### Todo
 
