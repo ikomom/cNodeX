@@ -49,7 +49,7 @@ class Request {
       }
     })
   }
-
+  //收藏主题
   static collect(data: CollectData) {
     return request({
       url: `/topic_collect/collect`,
@@ -57,7 +57,7 @@ class Request {
       data
     })
   }
-
+  //取消收藏主题
   static deCollect(data: CollectData) {
     return request({
       url: `/topic_collect/de_collect`,
@@ -78,48 +78,48 @@ class Request {
     })
   }
 
-  static getUnreadMessageCount(accesstoken: string) {
-    return request({
-      url: `/message/count`,
-      data: {
-        accesstoken,
-      }
-    })
-  }
-
-  /**
-   * 获取已读和未读消息
-   * @param accesstoken
-   */
-  static getAllMessage(accesstoken: string) {
-    return request({
-      url: `/messages`,
-      data: {
-        mdrender: false,
-        accesstoken,
-      }
-    })
-  }
-
-  static markAllMessage(accesstoken: string) {
-    return request({
-      url: `/message/mark_all`,
-      method: 'POST',
-      data: {
-        accesstoken,
-      }
-    })
-  }
-
-  static markOnnMessage(msg_id: string, accesstoken: string) {
-    return request({
-      url: `/message/mark_one/${msg_id}`,
-      method: 'POST',
-      data: {
-        accesstoken,
-      }
-    })
-  }
+  // static getUnreadMessageCount(accesstoken: string) {
+  //   return request({
+  //     url: `/message/count`,
+  //     data: {
+  //       accesstoken,
+  //     }
+  //   })
+  // }
+  //
+  // /**
+  //  * 获取已读和未读消息
+  //  * @param accesstoken
+  //  */
+  // static getAllMessage(accesstoken: string) {
+  //   return request({
+  //     url: `/messages`,
+  //     data: {
+  //       mdrender: false,
+  //       accesstoken,
+  //     }
+  //   })
+  // }
+  //
+  // static markAllMessage(accesstoken: string) {
+  //   return request({
+  //     url: `/message/mark_all`,
+  //     method: 'POST',
+  //     data: {
+  //       accesstoken,
+  //     }
+  //   })
+  // }
+  //
+  // static markOnnMessage(msg_id: string, accesstoken: string) {
+  //   return request({
+  //     url: `/message/mark_one/${msg_id}`,
+  //     method: 'POST',
+  //     data: {
+  //       accesstoken,
+  //     }
+  //   })
+  // }
 
 }
 

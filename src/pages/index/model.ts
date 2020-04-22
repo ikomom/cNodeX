@@ -38,16 +38,27 @@ export default {
       })
     },
     * login({payload}, {call, put}) {
-      const {accesstoken} = payload;
+      const {accesstoken, notShowTips} = payload;
       const {success, ...loginInfo} = yield call(Request.validateAccessToken, accesstoken);
       if (success) {
         const {data} = yield call(Request.getUerInfo, loginInfo.loginname)
-        // Taro.setStorage({key: 'loginInfo', data: {}})
         yield put({type: 'saveUser', payload: {accesstoken, userInfo: data}})
-        Tips.toast('登录成功');
-      }else {
+        !notShowTips && Tips.toast('登录成功');
+        Taro.setStorage({
+          key: 'loginInfo', data: {
+            accesstoken,
+            loginInfo,
+          }
+        }).then(res => {
+          console.log('登录状态保存成功', res);
+        })
+      } else {
         Tips.toast('accesstoken已失效，请重新输入')
       }
+    },
+    * loginOut(_state, {put}) {
+      yield put({type: 'saveUser', payload: {accesstoken: '', userInfo: {}}})
+      Taro.setStorage({key: 'loginInfo', data: {}})
     }
   },
 

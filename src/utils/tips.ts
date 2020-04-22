@@ -32,7 +32,7 @@ export default class Tips {
    * 加载提示弹窗
    */
 
-  static loding(title:'加载中',force = false){
+  static loading(title = '加载中', force?:boolean){
     if (this.isLoading && !force) {
       return
     }

@@ -19,6 +19,7 @@ export interface ListItemProps {
   item: DataInterface
   // 可变参数
   onClick?: (events: ITouchEvent, ...params: any[]) => any
+  onClickAuthor?: (events: ITouchEvent, ...params: any[]) => any
   timeType?: TimeTypeProps
 }
 

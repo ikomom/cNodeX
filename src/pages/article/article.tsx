@@ -1,5 +1,5 @@
 import Taro, { Config } from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import { Image, View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 
 import { ArticleProps, ArticleState } from './article.interface'
@@ -7,8 +7,14 @@ import './article.scss'
 import ListItem from "../../components/listItem/listItem";
 import MdParse from "../../components/mdparse/mdparse";
 import ListReply from "../../components/ListReply/ListReply";
+import collectImage from "../../assets/images/collect.png";
+import collectOnImage from "../../assets/images/collect_on.png";
 
-@connect(({article, index}) => ({...article, data: index.currentSelectData, accesstoken: index.accesstoken}))
+@connect(({article, index}) => ({
+  ...article,
+  data: index.currentSelectData,
+  accesstoken: index.accesstoken
+}))
 class Article extends Taro.Component<ArticleProps, ArticleState> {
   config: Config = {
     navigationBarTitleText: '',
@@ -44,10 +50,24 @@ class Article extends Taro.Component<ArticleProps, ArticleState> {
     })
   }
 
+  handleCollect = () => {
+   this.props.dispatch({
+      type: 'article/changeCollect',
+      payload: {
+
+      }
+    })
+  }
+
   render() {
-    const {data, content, replies} = this.props;
+    const {data, content, replies, accesstoken, collect} = this.props;
     return (
       <View className='fx-article-wrap'>
+        <Image
+          src={collect ? collectOnImage : collectImage} mode='scaleToFill'
+          className='collect collect-article' hidden={!accesstoken}
+          onClick={this.handleCollect}
+        />
         <ListItem item={data} timeType='current' />
         <MdParse type='markdown' content={content} />
         <View className='replies'>

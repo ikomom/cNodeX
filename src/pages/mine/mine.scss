@@ -5,6 +5,14 @@
     width: 100%;
     min-height: 90vh;
 
+    .loginOut {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      width: 58px;
+      height: 58px;
+    }
+
     .user-main {
       height: 200px;
       margin-top: 80px;
@@ -22,47 +30,5 @@
       height: 30px;
     }
 
-    .recent-wrap {
-      width: 100%;
-
-      &-title {
-        font-weight: bold;
-        font-size: 30px;
-      }
-
-      .recent-item {
-        display: flex;
-        padding: 20px 20px;
-        color: #666;
-        border-bottom: 1px solid #eee;
-
-        .avatar {
-          width: 80px;
-          height: 80px;
-          flex-shrink: 0;
-        }
-
-        &-time {
-          font-size: 24px;
-          color: #bfbfbf;
-        }
-
-        &-right {
-          display: flex;
-          flex-direction: column;
-          width: 615px;
-
-          &-author {
-            display: flex;
-            justify-content: space-between;
-            font-size: 28px;
-          }
-
-          &-title {
-            @include ignoreText;
-          }
-        }
-      }
-    }
   }
 }

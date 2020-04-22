@@ -29,6 +29,7 @@ class App extends Component {
       'pages/index/index',
       'pages/mine/mine',
       'pages/article/article',
+      'pages/collect/collect',
     ],
     window: {
       backgroundColor: '#fff',
@@ -62,9 +63,9 @@ class App extends Component {
    */
   async componentDidMount() {
     // 获取参数
-    const referrerInfo = this.$router.params.referrerInfo
-    const query = this.$router.params.query
-    console.warn("初始化", referrerInfo, query);
+    // const referrerInfo = this.$router.params.referrerInfo
+    // const query = this.$router.params.query
+    // console.warn("初始化", referrerInfo, query);
     // !globalData.extraData && (globalData.extraData = {})
     // if (referrerInfo && referrerInfo.extraData) {
     //   globalData.extraData = referrerInfo.extraData

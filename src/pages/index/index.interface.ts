@@ -35,15 +35,16 @@ export interface CommonInterface {
 }
 
 export interface DataInterface extends CommonInterface {
-  tab: string
   author_id: string
   title: string
   last_reply_at: string
-  reply_count: number
-  good: boolean
-  top: boolean
-  visit_count: number
+  reply_count?: number
+  tab?: string
+  good?: boolean
+  top?: boolean
+  visit_count?: number
   replies?: Array<object>
+  is_collect?: boolean
 }
 
 export interface AuthorInterface {

@@ -1,5 +1,5 @@
 /**
- * article.state 参数类型
+ * .state 参数类型
  *
  * @export
  * @interface ArticleState
@@ -20,6 +20,7 @@ export interface ArticleProps {
   accesstoken: string
   replies: Array<ReplayInterface>
   content: string
+  collect: boolean
   dispatch?: any
 }
 

@@ -12,6 +12,8 @@ class ListItem extends Component<ListItemProps, ListItemState> {
     timeType: 'ago',
     onClick: () => {
     },
+    onClickAuthor: () => {
+    },
   }
 
   constructor(props: ListItemProps) {

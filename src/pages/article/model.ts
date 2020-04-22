@@ -7,6 +7,7 @@ export default {
   state: {
     content: '',
     replies: [],
+    collect: false,
   },
 
   effects: {
@@ -15,11 +16,27 @@ export default {
         const {id: topicID, accesstoken} = payload;
         const {data: topicData} = yield call(Request.getTopicDetail, topicID, accesstoken)
         if (topicData) {
-          yield put({type: 'save', payload: {content: topicData.content}})
-          yield put({type: 'save', payload: {replies: topicData.replies}})
+          yield put({
+            type: 'save',
+            payload: {content: topicData.content, replies: topicData.replies, collect: topicData.is_collect}
+          })
+          const current = {...topicData}
+          delete current.replies;
+          yield put({type: 'index/saveCurrentSelect', payload: {data: current}})
         }
       } catch (e) {
         console.error(e)
+      }
+    },
+    * changeCollect(_payload, {select, put, call}) {
+      const {collect, ..._data} = yield select(({index, article}) => ({
+        collect: article.collect,
+        topic_id: index.currentSelectData.id,
+        accesstoken: index.accesstoken
+      }))
+      const {success} = yield call(collect ? Request.deCollect :  Request.collect, {..._data})
+      if(success) {
+        yield put({type: 'save', payload: {collect: !collect}})
       }
     }
   },

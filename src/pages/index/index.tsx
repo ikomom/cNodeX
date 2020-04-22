@@ -61,7 +61,13 @@ class Index extends Taro.Component<IndexProps, IndexState> {
 
   async componentDidMount() {
     await this.getTopics("all")
-
+    const {accesstoken} = Taro.getStorageSync("loginInfo");
+    if (accesstoken) {
+      this.props.dispatch({
+        type: 'index/login',
+        payload: {accesstoken, notShowTips: true}
+      })
+    }
     Taro.onMemoryWarning(level => {
       console.warn("内存告警", level)
     })

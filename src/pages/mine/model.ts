@@ -1,14 +1,28 @@
+import Request from "../../config/api";
 
-    // import Taro from '@tarojs/taro';
-    // import * as mineApi from './service';
-    export default {
-        namespace: 'mine',
-        state: {
-        },
+export default {
+  namespace: 'mine',
+  state: {
+    currentCollect: []
+  },
 
-        effects: {},
-
-        reducers: {}
-
+  effects: {
+    * getCollection({payload}, {put, call}) {
+      const {data, success} = yield call(Request.getUserCollect, payload.loginname)
+      if (success) {
+        yield put({type: 'save', payload: {currentCollect: data}})
+      }
     }
+  },
+
+  reducers: {
+    save(state, {payload}) {
+      return {
+        ...state,
+        ...payload,
+      }
+    }
+  }
+
+}
 
