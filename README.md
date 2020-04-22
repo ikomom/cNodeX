@@ -37,14 +37,14 @@ npm run script:com [Component Name] # 创建组件
 
 扫码访问小程序:
 
-![Gitter](img/cnodx.jpg)
+![cNodeX](https://wx1.sinaimg.cn/mw1024/005IrgR0gy1ge2j7wcw5tj309k09kgn1.jpg)
 
 ## 部分页面展示
 |Home|Article|
 | :---: | :---: |
-|![首页](img/Home.jpg) | ![文章](img/article.jpg)|
+|![首页](https://wx4.sinaimg.cn/mw1024/005IrgR0gy1ge2j7x1a90j30u01hc7br.jpg) | ![文章](https://wx4.sinaimg.cn/mw1024/005IrgR0gy1ge2j7wes9hj30u01hctj4.jpg)|
 |Mine|Collect|
-|![我的](img/Home.jpg) | ![收藏](img/collect.jpg)|
+|![我的](https://wx4.sinaimg.cn/mw1024/005IrgR0gy1ge2j7wh4mwj30u01hc79y.jpg) | ![收藏](https://wx3.sinaimg.cn/mw1024/005IrgR0gy1ge2j7wtl3nj30u01hcqaw.jpg)|
 
 ### Todo
 
