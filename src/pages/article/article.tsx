@@ -8,7 +8,7 @@ import ListItem from "../../components/listItem/listItem";
 import MdParse from "../../components/mdparse/mdparse";
 import ListReply from "../../components/ListReply/ListReply";
 
-@connect(({article, index}) => ({...article, data: index.currentSelectData}))
+@connect(({article, index}) => ({...article, data: index.currentSelectData, accesstoken: index.accesstoken}))
 class Article extends Taro.Component<ArticleProps, ArticleState> {
   config: Config = {
     navigationBarTitleText: '',
@@ -23,7 +23,8 @@ class Article extends Taro.Component<ArticleProps, ArticleState> {
     return this.props.dispatch({
       type: 'article/getTopicDetail',
       payload: {
-        id: this.props.data.id
+        id: this.props.data.id,
+        accesstoken: this.props.accesstoken
       }
     })
   }
@@ -31,7 +32,6 @@ class Article extends Taro.Component<ArticleProps, ArticleState> {
   componentDidMount() {
     this.getTopicDetail()
   }
-
 
 
   async componentWillUnmount() {
@@ -50,7 +50,7 @@ class Article extends Taro.Component<ArticleProps, ArticleState> {
       <View className='fx-article-wrap'>
         <ListItem item={data} timeType='current' />
         <MdParse type='markdown' content={content} />
-        <View className='replies' >
+        <View className='replies'>
           {
             replies.length && replies.map((reply, index) => {
               return <ListReply key={reply.id} reply={reply} timeType='current' index={index + 1} />

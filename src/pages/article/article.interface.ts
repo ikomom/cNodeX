@@ -17,6 +17,7 @@ export interface ArticleState {
  */
 export interface ArticleProps {
   data: DataInterface
+  accesstoken: string
   replies: Array<ReplayInterface>
   content: string
   dispatch?: any

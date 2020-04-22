@@ -34,8 +34,8 @@ class MdParse extends Taro.Component<MdparseProps, MdparseState> {
           console.log('tap', e);
         }
       }
-    }) || {};
-    this.setState({nodes})
+    }) ;
+    this.setState({nodes: (nodes || {})})
   }
 
   componentDidMount() {

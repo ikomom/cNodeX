@@ -12,8 +12,8 @@ export default {
   effects: {
     * getTopicDetail({payload}, {call, put}) {
       try {
-        const {id: topicID} = payload;
-        const {data: topicData} = yield call(Request.getTopicDetail, topicID)
+        const {id: topicID, accesstoken} = payload;
+        const {data: topicData} = yield call(Request.getTopicDetail, topicID, accesstoken)
         if (topicData) {
           yield put({type: 'save', payload: {content: topicData.content}})
           yield put({type: 'save', payload: {replies: topicData.replies}})

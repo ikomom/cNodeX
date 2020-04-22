@@ -2,8 +2,6 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import dayjs from "dayjs";
 import { Provider } from "@tarojs/redux";
-// import 'taro-ui/dist/style/index.scss' // 全局引入
-// import "@tarojs/async-await";
 import 'dayjs/locale/zh-cn'
 
 import './app.scss'
@@ -12,8 +10,7 @@ import dva from './utils/dva';
 import models from './models'
 import Index from './pages/index'
 
-// 如果需要在 h5 环境中开启 React Devtools
-// 取消以下注释：
+// h5 环境中开启 React Devtools
 // if (process.env.NODE_ENV !== 'production' && process.env.TARO_ENV === 'h5')  {
 //   require('nerv-devtools')
 // }

@@ -25,12 +25,11 @@ class ListReply extends Taro.Component<ListReplyProps, ListReplyState> {
             <Image src={reply.author.avatar_url} mode='scaleToFill' className='avatar' lazyLoad />
             <View className='loginname'>{reply.author.loginname}</View>
           </View>
-          {/*todo 点赞功能 icon-right-on*/}
-          <View className='icon-content'>
+          {reply.ups.length ? <View className='icon-content'>
             {reply.ups.length || ''}
             <View style='width:5px' />
-            <View className='icon-right ' />
-          </View>
+            <View className={`icon-right ${reply.is_uped ? 'icon-right-on' : ''}`} />
+          </View> : null}
         </View>
         <View className='main'>
           <MdParse type='markdown' content={reply.content} />

@@ -7,9 +7,9 @@ import Taro from "@tarojs/taro";
 import {baseUrl} from "../config";
 import Tips from "./tips";
 
-declare type Methods = "GET" | "OPTIONS" | "HEAD" | "PUT" | "DELETE" | "TRACE" | "CONNECT";
+declare type Methods = "GET" | "POST" | "OPTIONS" | "HEAD" | "PUT" | "DELETE" | "TRACE" | "CONNECT";
 declare type Headers = { [key: string]: string };
-declare type Data = { method?: Methods; [key: string]: any; };
+declare type Data = { method?: Methods; [key: string]: any; } | string;
 
 interface Options {
   url: string;
@@ -37,11 +37,12 @@ console.warn("进入request页面！！！！！")
 
 export default (opts: Options) => {
   if (!opts.method) opts.method = "GET"
+
   return new Promise(((resolve) => {
     Taro.request({
       ...opts,
       header: {
-        "content-type": "json",
+        "content-type": opts.method === "POST"? "application/x-www-form-urlencoded": "json",
         ...opts.header,
       },
       url: baseUrl + opts.url,

@@ -1,6 +1,13 @@
 $prefix: 'fx';
 
 $base-z-index: 1500;
+$width: 750px;
+
+@mixin ignoreText {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
 
 .listClick {
   background: #e4e4e4;
@@ -17,32 +24,22 @@ $base-z-index: 1500;
   background: url('../../assets/images/right_on.png') no-repeat;
 }
 
-
 .header {
   display: flex;
   font-size: 28px;
   justify-content: space-between;
   margin-bottom: 18px;
-
   .author {
     display: flex;
-
     .loginname {
       line-height: 60px;
     }
-
-    .avatar {
-      width: 60px;
-      height: 60px;
-      border-radius: 10px;
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-position: right center;
-      margin-right: 20px;
-    }
   }
-
 }
 
-
-
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  margin-right: 20px;
+}

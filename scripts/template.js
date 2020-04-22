@@ -20,15 +20,13 @@ if (!dirName) {
 const indexTep = `
 import Taro, { PureComponent, Config } from '@tarojs/taro'
 import { View } from '@tarojs/components'
-// import { connect } from '@tarojs/redux'
-// import Tips from '../../utils/tips'
+import { connect } from '@tarojs/redux'
 import { ${capPirName}Props, ${capPirName}State } from './${dirName}.interface'
 import './${dirName}.scss'
 
-// @connect(({ ${dirName} }) => ({
-//     ...${dirName},
-// }))
-
+@connect(({ ${dirName} }) => ({
+    ...${dirName},
+}))
 class ${capPirName} extends PureComponent<${capPirName}Props,${capPirName}State > {
 config:Config = {
     navigationBarTitleText: '${dirName}'

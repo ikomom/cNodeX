@@ -10,6 +10,12 @@ declare type topicsRequestData = {
   limit: number,
   mdrender: boolean
 }
+
+declare type CollectData = {
+  accessToken: string
+  top_id: string
+}
+
 class Request {
   /**
    * 主题首页
@@ -33,6 +39,88 @@ class Request {
       }
     })
   }
+
+  static validateAccessToken(accesstoken?: string) {
+    return request({
+      url: `/accesstoken`,
+      method: 'POST',
+      data: {
+        accesstoken,
+      }
+    })
+  }
+
+  static collect(data: CollectData) {
+    return request({
+      url: `/topic_collect/collect`,
+      method: 'POST',
+      data
+    })
+  }
+
+  static deCollect(data: CollectData) {
+    return request({
+      url: `/topic_collect/de_collect`,
+      method: 'POST',
+      data
+    })
+  }
+
+  static getUserCollect(loginname: string) {
+    return request({
+      url: `/topic_collect/${loginname}`,
+    })
+  }
+
+  static getUerInfo(loginname: string) {
+    return request({
+      url: `/user/${loginname}`,
+    })
+  }
+
+  static getUnreadMessageCount(accesstoken: string) {
+    return request({
+      url: `/message/count`,
+      data: {
+        accesstoken,
+      }
+    })
+  }
+
+  /**
+   * 获取已读和未读消息
+   * @param accesstoken
+   */
+  static getAllMessage(accesstoken: string) {
+    return request({
+      url: `/messages`,
+      data: {
+        mdrender: false,
+        accesstoken,
+      }
+    })
+  }
+
+  static markAllMessage(accesstoken: string) {
+    return request({
+      url: `/message/mark_all`,
+      method: 'POST',
+      data: {
+        accesstoken,
+      }
+    })
+  }
+
+  static markOnnMessage(msg_id: string, accesstoken: string) {
+    return request({
+      url: `/message/mark_one/${msg_id}`,
+      method: 'POST',
+      data: {
+        accesstoken,
+      }
+    })
+  }
+
 }
 
 
