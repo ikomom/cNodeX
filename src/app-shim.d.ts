@@ -26,3 +26,4 @@ declare global {
 // 声明
 declare let require: any;
 declare let dispatch: any
+declare var wx: any;

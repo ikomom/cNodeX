@@ -16,6 +16,7 @@ export const SHARE_INFO = {
  * 默认路径
  */
 export const baseUrl = "https://cnodejs.org/api/v1";
+// export const baseUrl = "https://ec2-52-197-183-123.ap-northeast-1.compute.amazonaws.com/api/v1";
 
 /**
  * 请求公共参数

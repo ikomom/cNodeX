@@ -1,5 +1,9 @@
 ### cNodeX
 
+> 社区最近证书炸了，没办法
+> 备用网页地址
+>https://ec2-52-197-183-123.ap-northeast-1.compute.amazonaws.com/api/v1/topics
+
 本仓库是`cNodeX`小程序对应的开源仓库。
 
 该项目采用 [Taro](https://taro.aotu.io/) + [Taro UI](https://taro-ui.aotu.io)  + [dvajs](https://dvajs.com/)进行开发，小程序内数据均来自于[cNode中文社区](https://cnodejs.org/api)

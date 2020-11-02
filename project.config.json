@@ -1,5 +1,6 @@
 {
-  "miniprogramRoot": "./dist",
+  "miniprogramRoot": "dist/",
+  "cloudfunctionRoot": "cloud/",
   "projectname": "cNodeX",
   "description": "a mini program for cNodeX",
   "appid": "wx46df6d8eb1efb1ab",

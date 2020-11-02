@@ -3,7 +3,7 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import dayjs from "dayjs";
 import { Provider } from "@tarojs/redux";
 import 'dayjs/locale/zh-cn'
-
+import './utils/v-request';
 import './app.scss'
 import '../scripts/request';
 import dva from './utils/dva';
@@ -79,12 +79,32 @@ class App extends Component {
     // 获取设备信息
     // const sys = await Taro.getSystemInfo()
     // console.warn('设备信息', sys)
+    // @ts-ignore
+    wx.cloud.init({
+      traceUser: true,
+    });
+    // Taro.cloud.callFunction({
+    //   name: 'v-request',//小程序云函数的名称
+    //   data: {
+    //     uri: 'https://mssnn.cn',
+    //   }
+    // }).then((res)=>{
+    //   return res
+    // }).catch(e => {
+    //   console.log(e);
+    // })
+    // wx.vrequest({
+    //     url: 'https://ec2-52-197-183-123.ap-northeast-1.compute.amazonaws.com/api/v1/topics',
+    //   success: ret => {
+    //     console.log(ret.data);
+    //   }
+    // })
   }
 
   render() {
     return (
       <Provider store={store}>
-        <Index />
+        <Index/>
       </Provider>
     )
   }
